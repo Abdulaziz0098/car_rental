@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+
+    <div class="hero" style="background-image: url({% static 'images/hero_1_a.jpg' %});">
+
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-10">
+
+                    <div class="row mb-5">
+                        <div class="col-lg-7 intro">
+                            <h1><strong>Rent a car</strong> is within your fingertips.</h1>
+                        </div>
+                    </div>
+                    <form class="trip-form" method="GET">
+                        {% csrf_token %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <h3 style="color: red">{{ message }}</h3>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="row align-items-center">
+                            <div class="mb-3 mb-md-0 col-md-3">
+                                <select name="company" id="" class="custom-select form-control">
+                                    <option selected value="">Car Company</option>
+                                    {% for foo in company_ %}
+                                        <option value="{{ foo }}">{{ foo }}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                            <div class="mb-3 mb-md-0 col-md-3">
+                                <select name="model" id="" class="custom-select form-control">
+                                    <option selected value="">Car Model</option>
+                                    {% for foo in model_ %}
+                                        <option value="{{ foo }}">{{ foo }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3 mb-md-0 col-md-3">
+                                <select name="engine" id="" class="custom-select form-control">
+                                    <option selected value="">Engine Number</option>
+                                    {% for foo in engine_ %}
+                                        <option value="{{ foo }}">{{ foo }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3 mb-md-0 col-md-3">
+                                <input type="submit" value="Search Now" class="btn btn-primary btn-block py-3"
+                                       name="search">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section">
+        <div class="container">
+            <h2 class="section-heading"><strong>How it works?</strong></h2>
+            <p class="mb-5">Easy steps to get you started</p>
+
+            <div class="row mb-5">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="step">
+                        <span>1</span>
+                        <div class="step-inner">
+                            <span class="number text-primary">01.</span>
+                            <h3>Select a car</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, laboriosam!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="step">
+                        <span>2</span>
+                        <div class="step-inner">
+                            <span class="number text-primary">02.</span>
+                            <h3>Fill up form</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, laboriosam!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="step">
+                        <span>3</span>
+                        <div class="step-inner">
+                            <span class="number text-primary">03.</span>
+                            <h3>Payment</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, laboriosam!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+                {% if result %}
+                    {% for obj in result %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+
+                            <div class="listing d-block  align-items-stretch">
+                                <div class="listing-img h-100 mr-4">
+                                    <img src="{{ obj.car_model.image }}" alt="Image" class="img-fluid">
+                                </div>
+                                <div class="listing-contents h-100">
+                                    <h3>{{ obj.car_model.model_name }}</h3>
+                                    <div class="rent-price">
+                                        <strong>{{ obj.car_model.vehicle.sales.price }}$</strong><span
+                                            class="mx-1">/</span>day
+                                    </div>
+
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Body type</span>
+                                            <span class="number">{{ obj.car_model.body_type }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Model Year</span>
+                                            <span class="number">{{ obj.car_model.model_year|date:"Y" }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Number of engine</span>
+                                            <span class="number">{{ obj.number_of_engine }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Size of wheel</span>
+                                            <span class="number">{{ obj.size_of_wheel }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Interior material</span>
+                                            <span class="number">{{ obj.interior_material }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">color</span>
+                                            <span class="number">{{ obj.color }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Battery capacity</span>
+                                            <span class="number">{{ obj.battery_capacity }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Range</span>
+                                            <span class="number">{{ obj.power }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Battery capacity</span>
+                                            <span class="number">{{ obj.car_model.vehicle.inventory }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Range</span>
+                                            <span class="number">{{ obj.power }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Company</span>
+                                            <span class="number">{{ obj.car_model.vehicle.inventory.company }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Location</span>
+                                            <div class="text-truncate">{{ obj.car_model.vehicle.inventory|truncatechars:25 }}</div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <p style="margin: auto;"><a href="{% url 'payment' obj.id %}"
+                                                                    class="btn btn-primary btn-primary">Rent Now</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for obj in vehicle %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+
+                            <div class="listing d-block  align-items-stretch">
+                                <div class="listing-img h-100 mr-4">
+                                    <img src="{{ obj.car_model.image }}" alt="Image" class="img-fluid">
+                                </div>
+                                <div class="listing-contents h-100">
+                                    <h3>{{ obj.car_model.model_name }}</h3>
+                                    <div class="rent-price">
+                                        <strong>{{ obj.car_model.vehicle.sales.price }}$</strong><span
+                                            class="mx-1">/</span>day
+                                    </div>
+
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Body type</span>
+                                            <span class="number">{{ obj.car_model.body_type }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Model Year</span>
+                                            <span class="number">{{ obj.car_model.model_year|date:"Y" }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Number of engine</span>
+                                            <span class="number">{{ obj.number_of_engine }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Size of wheel</span>
+                                            <span class="number">{{ obj.size_of_wheel }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Interior material</span>
+                                            <span class="number">{{ obj.interior_material }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">color</span>
+                                            <span class="number">{{ obj.color }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Battery capacity</span>
+                                            <span class="number">{{ obj.battery_capacity }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Range</span>
+                                            <span class="number">{{ obj.power }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Company</span>
+                                            <span class="number">{{ obj.car_model.vehicle.inventory.company }}</span>
+                                        </div>
+                                        <div class="listing-feature pr-4">
+                                            <span class="caption">Location</span>
+                                            <div class="text-truncate">{{ obj.car_model.vehicle.inventory|truncatechars:25 }}</div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <p style="margin: auto;"><a href="{% url 'payment' obj.id %}"
+                                                                    class="btn btn-primary btn-primary">Rent Now</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock main %}

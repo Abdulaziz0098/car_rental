@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+
+    <div class="hero inner-page" style="background-image: url({% static 'images/hero_1_a.jpg' %});">
+        <div class="container">
+            <div class="row align-items-end ">
+                <div class="col-lg-5">
+
+                    <div class="intro">
+                        <h1><strong>Payment</strong></h1>
+                        <div class="custom-breadcrumbs"><a href="{% url 'index' %}">Home</a> <span
+                                class="mx-2">/</span>
+                            <strong>Payment</strong>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <h2 class="section-heading"><strong>Confirm Customer Details</strong></h2>
+                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 mb-5">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input name="full_name" type="text" class="form-control" placeholder="Full Name">
+                            </div>
+
+                            <div class="col-md-6">
+                                <input name="phone_number" type="text" class="form-control" placeholder="Phone Number">
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input name="address" type="text" class="form-control" placeholder="Address">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <div class="form-control-wrap" style="display: flex !important;">
+                                    <input name="dob" type="text" id="cf-3" placeholder="Date Of Birth"
+                                           class="form-control datepicker px-3">
+                                    <span class="icon icon-date_range"
+                                          style="transform: translate(-30px,35%) !important; "></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <select name="gender" id="" class="custom-select form-control">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4 mb-4 mb-lg-0">
+                                <input name="passport" type="text" class="form-control" placeholder="Passport Number">
+                            </div>
+                            <div class="col-md-4 mb-4 mb-lg-0">
+                                <input name="licence" type="text" class="form-control" placeholder="Licence ID">
+                            </div>
+                            <div class="col-md-4 mb-4 mb-lg-0">
+                                <input name="insurance" type="text" class="form-control" placeholder="Insurance ID">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <h2 class="section-heading"><strong>Confirm Rental Details</strong></h2>
+                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input disabled type="text" class="form-control" value="{{ vehicle.car_model }}">
+                            </div>
+                            <div class="col-md-6">
+                                <input disabled type="text" class="form-control"
+                                       value="{{ vehicle.car_model.body_type }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input disabled type="text" class="form-control"
+                                       value="{{ vehicle.car_model.model_year|date:"Y" }}">
+                            </div>
+                            <div class="col-md-6">
+                                <input disabled type="text" class="form-control" value="{{ vehicle.number_of_engine }}">
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input disabled type="text" class="form-control" value="{{ vehicle.size_of_wheel }}">
+                            </div>
+
+                            <div class="col-md-6">
+                                <input disabled type="text" class="form-control"
+                                       value="{{ vehicle.interior_material }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input disabled type="text" class="form-control" value="{{ vehicle.color }}">
+                            </div>
+                            <div class="col-md-6">
+                                <input disabled type="text" class="form-control" value="{{ vehicle.power }}">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input disabled type="text" class="form-control" value="{{ vehicle.car_model }}">
+                            </div>
+
+                            <div class="col-md-6">
+                                <input disabled type="text" class="form-control"
+                                       value="{{ vehicle.car_model.vehicle.sales.price }}">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input disabled type="text" class="form-control"
+                                       value="{{ vehicle.car_model.vehicle.plate_number }}">
+                            </div>
+                            <div class="col-md-6">
+                                <input disabled type="text" class="form-control"
+                                       value="{{ vehicle.car_model.vehicle.vin_number }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input disabled type="text" class="form-control"
+                                       value="{{ vehicle.car_model.vehicle.inventory.company }}">
+                            </div>
+                            <div class="col-md-6">
+                                <input disabled type="text" class="form-control"
+                                       value="{{ vehicle.car_model.vehicle.inventory }}">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <h2 class="section-heading"><strong>Confirm Your Payment</strong></h2>
+                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="mb-3 mb-md-0 col-md-3">
+                                <input name="cvv" type="text" class="form-control" placeholder="CVV">
+                            </div>
+                            <div class="mb-3 mb-md-0 col-md-3">
+                                <select name="payment_type" id="" class="custom-select form-control">
+                                    <option value="">Payment Method</option>
+                                    <option value="Visa">Visa</option>
+                                    <option value="Mastercard">Mastercard</option>
+                                    <option value="PayPal">PayPal</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 mb-md-0 col-md-3">
+                                <input name="amount" type="text" class="form-control" placeholder="Amount">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-9 mb-4 mb-lg-0">
+                                <input name="card_number" type="text" class="form-control" placeholder="Card Number">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="mb-3 mb-md-0 col-md-3">
+                                <label for="id_start">Start Date</label>
+                                <input name="start_day" id="id_start" type="datetime-local" class="form-control">
+                            </div>
+                            <div class="mb-3 mb-md-0 col-md-3">
+                                <label for="id_end">End Date</label>
+                                <input name="end_day" type="datetime-local" id="id_end" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row" style="margin-top: 20px">
+                            <div class="col-md-6 mr-auto">
+                                <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
